@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { MovieCards } from "./MovieCards";
+
+/* TODOs
+- display movie title as alt text - need to merge links with movie titles data
+- add a 'rate another movie' button, and show only one movie at a time like a slideshow
+- inform user that they should rate at least 20 items for best experience(maybe subtitle)
+- display count/countdown of movies rated?
+- add button to "Show me recommendations" - can use Grid cards layout to show top K movies?
+- add button to "go back to rating"
+*/
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>Rate some movies!</p>
       </header>
+      <br />
+      <MovieCards />
     </div>
   );
 }
