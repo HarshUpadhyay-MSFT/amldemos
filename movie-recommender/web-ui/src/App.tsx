@@ -2,13 +2,11 @@ import React from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MovieGridWithRatings } from "./MovieGridWithRatings";
-import { pick10Random, pick20Random } from "./movieData";
+import { pick20Random } from "./movieData";
 import Button from "@mui/material/Button";
 import { MovieGrid } from "./MovieGrid";
 
 // TODO: inform user that they should rate at least 20 items for best experience(maybe subtitle)
-// TODO: hook with backend network calls
-
 function App() {
   const ratings = React.useRef<{ [K in string]: number | null }>({});
   const updateRating = React.useCallback(
@@ -41,7 +39,7 @@ function App() {
         </Button>
       </header>
       <br />
-      {showRecommendations && <MovieGrid movies={pick10Random()} />}
+      {showRecommendations && <MovieGrid ratings={ratings.current} />}
       {!showRecommendations && (
         <MovieGridWithRatings movies={movies} updateItemRating={updateRating} />
       )}
