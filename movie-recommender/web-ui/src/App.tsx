@@ -39,10 +39,15 @@ function App() {
         </Button>
       </header>
       <br />
-      {showRecommendations && <MovieGrid ratings={ratings.current} />}
-      {!showRecommendations && (
-        <MovieGridWithRatings movies={movies} updateItemRating={updateRating} />
-      )}
+      <div style={{backgroundColor: "#282c34"}}>
+        {showRecommendations && <MovieGrid ratings={ratings.current} />}
+        {!showRecommendations && (
+          <MovieGridWithRatings
+            movies={movies}
+            updateItemRating={updateRating}
+          />
+        )}
+      </div>
     </div>
   );
 }
