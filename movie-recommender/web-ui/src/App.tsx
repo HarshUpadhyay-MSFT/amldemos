@@ -1,25 +1,50 @@
 import React from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { MovieCards } from "./MovieCards";
+import { MovieGridWithRatings } from "./MovieGridWithRatings";
+import { pick10Random, pick20Random } from "./movieData";
+import Button from "@mui/material/Button";
+import { MovieGrid } from "./MovieGrid";
 
-/* TODOs
-- display movie title as alt text - need to merge links with movie titles data
-- add a 'rate another movie' button, and show only one movie at a time like a slideshow
-- inform user that they should rate at least 20 items for best experience(maybe subtitle)
-- display count/countdown of movies rated?
-- add button to "Show me recommendations" - can use Grid cards layout to show top K movies?
-- add button to "go back to rating"
-*/
+// TODO: inform user that they should rate at least 20 items for best experience(maybe subtitle)
+// TODO: hook with backend network calls
 
 function App() {
+  const ratings = React.useRef<{ [K in string]: number | null }>({});
+  const updateRating = React.useCallback(
+    (itemId: string, rating: number | null) => {
+      if (!rating) {
+        delete ratings.current[itemId];
+      } else {
+        ratings.current[itemId] = rating;
+      }
+    },
+    []
+  );
+  const movies = React.useMemo(pick20Random, []);
+
+  const [showRecommendations, setShowRecommendations] = React.useState(false);
+  const togglePage = React.useCallback(
+    () => setShowRecommendations(!showRecommendations),
+    [showRecommendations]
+  );
+  const btnLabel = showRecommendations
+    ? "Rate more movies"
+    : "Suggest movies, please!";
+
   return (
     <div>
       <header className="App-header">
         <p>Rate some movies!</p>
+        <Button variant="contained" onClick={togglePage}>
+          {btnLabel}
+        </Button>
       </header>
       <br />
-      <MovieCards />
+      {showRecommendations && <MovieGrid movies={pick10Random()} />}
+      {!showRecommendations && (
+        <MovieGridWithRatings movies={movies} updateItemRating={updateRating} />
+      )}
     </div>
   );
 }

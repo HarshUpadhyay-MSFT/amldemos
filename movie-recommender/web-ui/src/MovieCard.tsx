@@ -1,19 +1,38 @@
+import { Card, CardContent, CardMedia, Rating } from "@mui/material";
 import * as React from "react";
-import Card from "react-bootstrap/Card";
 
 interface IMovieCardProps {
-  url: string;
   id: string;
+  url: string;
+  title: string;
+  onChange?: (id: string, rating: number | null) => void;
 }
-export const MovieCard: React.FunctionComponent<IMovieCardProps> = (
-  props: IMovieCardProps
-) => {
+
+export const MovieCard: React.FunctionComponent<IMovieCardProps> = ({
+  id,
+  url,
+  title,
+  onChange,
+}: IMovieCardProps) => {
+  const updateRating = React.useCallback(
+    (_ev: any, value: number | null) => {
+      onChange?.(id, value);
+    },
+    [id, onChange]
+  );
   return (
-    <Card border="dark" style={{ width: "18rem" }}>
-      <Card.Img variant={"top"} src={props.url} height={"300px"} />
-      {/* <Card.Body>
-        <input type={"number"} min={1} max={5}></input>
-      </Card.Body> */}
+    <Card sx={{ maxWidth: 250 }}>
+      <CardMedia
+        component="img"
+        height="300"
+        image={url}
+        alt={title}
+      />
+      {onChange && (
+        <CardContent>
+          <Rating onChange={updateRating} />
+        </CardContent>
+      )}
     </Card>
   );
 };
