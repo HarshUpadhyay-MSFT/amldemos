@@ -1,0 +1,7 @@
+.CardContent{
+    text-align: center;
+    padding: 5px;
+}
+.CardContent:last-child{
+    padding-bottom: 5px;
+}
