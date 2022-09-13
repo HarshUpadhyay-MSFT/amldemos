@@ -1,4 +1,10 @@
-import { Card, CardContent, CardMedia, Rating } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Rating,
+  Typography,
+} from "@mui/material";
 import * as React from "react";
 import "./MovieCard.css";
 
@@ -22,8 +28,12 @@ export const MovieCard: React.FunctionComponent<IMovieCardProps> = ({
     [id, onChange]
   );
   return (
-    <Card sx={{ maxWidth: 250 }}>
+    <Card sx={{ maxWidth: 250 }} title={title}>
       <CardMedia component="img" height="300" image={url} alt={title} />
+      <br/>
+      <Typography className="CardContent" gutterBottom variant="subtitle2" component="div">
+        {title}
+      </Typography>
       {onChange && (
         <CardContent className="CardContent">
           <Rating onChange={updateRating} />

@@ -5,6 +5,7 @@ import { MovieGridWithRatings } from "./MovieGridWithRatings";
 import { pick20Random } from "./movieData";
 import Button from "@mui/material/Button";
 import { MovieGrid } from "./MovieGrid";
+import Icon from "@mui/material/Icon";
 
 // TODO: inform user that they should rate at least 20 items for best experience(maybe subtitle)
 function App() {
@@ -19,7 +20,11 @@ function App() {
     },
     []
   );
-  const movies = React.useMemo(pick20Random, []);
+  const [movies, setMovies] = React.useState(pick20Random);
+  const randomizeMovies = React.useCallback(
+    () => setMovies(pick20Random),
+    [setMovies]
+  );
 
   const [showRecommendations, setShowRecommendations] = React.useState(false);
   const togglePage = React.useCallback(
@@ -33,13 +38,30 @@ function App() {
   return (
     <div>
       <header className="App-header">
-        <p>Rate some movies!</p>
-        <Button variant="contained" onClick={togglePage}>
-          {btnLabel}
-        </Button>
+        <title>Movielens recommender</title>
+        <p>
+          {showRecommendations
+            ? "Here are some movies we think you'll like based on your ratings"
+            : "Rate some movies below and we'll suggest some more that you're going to like!"}
+        </p>
+        <div style={{ flexDirection: "row" }}>
+          <Button variant="contained" onClick={togglePage}>
+            {btnLabel}
+          </Button>
+          {!showRecommendations && (
+            <Button
+              sx={{ marginLeft: "10px" }}
+              variant="contained"
+              onClick={randomizeMovies}
+            >
+              <Icon>autorenew</Icon>
+              {"Reload"}
+            </Button>
+          )}
+        </div>
       </header>
       <br />
-      <div style={{backgroundColor: "#282c34"}}>
+      <div style={{ backgroundColor: "#282c34" }}>
         {showRecommendations && <MovieGrid ratings={ratings.current} />}
         {!showRecommendations && (
           <MovieGridWithRatings
