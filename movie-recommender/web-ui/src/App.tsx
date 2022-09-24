@@ -6,10 +6,22 @@ import { pick20Random } from "./movieData";
 import Button from "@mui/material/Button";
 import { MovieGrid } from "./MovieGrid";
 import Icon from "@mui/material/Icon";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 // TODO: inform user that they should rate at least 20 items for best experience(maybe subtitle)
+
+const queryClient = new QueryClient();
+
 function App() {
-  const ratings = React.useRef<{ [K in string]: number | null }>({});
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Recommender />
+    </QueryClientProvider>
+  );
+}
+
+function Recommender() {
+  const ratings = React.useRef<{ [K in string]: number }>({});
   const updateRating = React.useCallback(
     (itemId: string, rating: number | null) => {
       if (!rating) {

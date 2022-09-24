@@ -17,9 +17,8 @@ export const MovieGridWithRatings: React.FunctionComponent<IProps> = ({
       {movies.map((item) => {
         const { movieTitle, moviePosterLink } = item[1];
         return (
-          <Col>
+          <Col key={item[0]}>
             <MovieCard
-              key={item[0]}
               url={moviePosterLink}
               title={movieTitle}
               id={item[0]}
