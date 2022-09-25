@@ -2,7 +2,7 @@ import axios from "axios";
 import * as React from "react";
 import { useQuery, UseQueryResult } from "react-query";
 
-const url = "http://localhost:5000/fetchRecs";
+const url = "http://localhost:5000/api/fetchRecs";
 
 export const useFlaskFetch = (ratings: { [K in string]: number }): UseQueryResult<Array<string>, any> => {
     const getRecommendations = React.useCallback(async () => {

@@ -1,5 +1,5 @@
 {
-  "name": "web-ui",
+  "name": "movie-recommender",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -25,6 +25,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-api": "cd api && react-flask39/bin/flask run --no-debugger",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -46,5 +47,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
