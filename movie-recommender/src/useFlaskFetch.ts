@@ -7,14 +7,12 @@ const url = "http://localhost:5000/api/fetchRecs";
 export const useFlaskFetch = (ratings: { [K in string]: number }): UseQueryResult<Array<string>, any> => {
     const getRecommendations = React.useCallback(async () => {
         const response = await axios.post(url, {
-            method: "GET",
+            method: 'POST',
             data: ratings,
             headers: { 'Content-Type': 'application/json' }
         });
         return response.data;
     }, [ratings]);
 
-    // const q = useQuery("movies", getRecommendations);
-    // console.log(q);
     return useQuery("movies", getRecommendations, {refetchInterval: false});
 }

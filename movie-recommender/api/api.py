@@ -3,16 +3,12 @@ import urllib.request
 import logging
 import json
 
-app = Flask(__name__, static_folder='../build', static_url_path='/')
-
-@app.route('/')
-def index():
-    return app.send_static_file('index.html')
+app = Flask(__name__)
 
 @app.route("/api/fetchRecs", methods=['POST'])
 def post():
     url = 'https://corymcc-movie4.westcentralus.inference.ml.azure.com/score'
-    api_key = 'me0FL322gQVsGZjHM1SodZDsKp34BHvk'
+    api_key = 'me0FL322gQVsGZjHM1SodZDsKp34BHvk' # need a better way to get API key - maybe akv
     headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key) } #, 'azureml-model-deployment': 'cors-4' }
 
     body=request.get_json()
