@@ -16,7 +16,7 @@ export const MovieGrid: React.FunctionComponent<MovieGridProps> = ({
 
   return (
     <>
-      {isLoading && <CircularProgress />}
+      {isLoading && <CircularProgress title="Loading your recommendations..." />}
       {isError && <p>{error}</p>}
       {isSuccess && (
         <Row xs={1} md={4} className="g-4">
