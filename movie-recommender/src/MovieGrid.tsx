@@ -4,7 +4,7 @@ import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 import { MovieCard } from "./MovieCard";
 import { movieData } from "./movieData";
-import { useFlaskFetch } from "./useFlaskFetch";
+import { useAzFuncFetch } from "./useAzFuncFetch";
 
 interface MovieGridProps {
   ratings: { [K in string]: number };
@@ -12,7 +12,7 @@ interface MovieGridProps {
 export const MovieGrid: React.FunctionComponent<MovieGridProps> = ({
   ratings,
 }: MovieGridProps) => {
-  const { data, isError, isLoading, isSuccess, error } = useFlaskFetch(ratings);
+  const { data, isError, isLoading, isSuccess, error } = useAzFuncFetch(ratings);
 
   return (
     <>

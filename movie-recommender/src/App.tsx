@@ -8,8 +8,6 @@ import { MovieGrid } from "./MovieGrid";
 import Icon from "@mui/material/Icon";
 import { QueryClient, QueryClientProvider } from "react-query";
 
-// TODO: inform user that they should rate at least 20 items for best experience(maybe subtitle)
-
 const queryClient = new QueryClient();
 
 function App() {
