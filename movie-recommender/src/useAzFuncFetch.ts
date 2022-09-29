@@ -3,7 +3,7 @@ import * as React from "react";
 import { useQuery, UseQueryResult } from "react-query";
 
 // const url = "https://amlp2-endpoint-proxy.azurewebsites.net/api/fetchRecs";
-const url = `/api/url`;
+const url = `/api/recs`;
 
 export const useAzFuncFetch = (ratings: { [K in string]: number }): UseQueryResult<Array<string>, any> => {
     const getRecommendations = React.useCallback(async () => {
