@@ -20,7 +20,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
     try {
         const ratings = JSON.parse(JSON.stringify(req.body) || "{}")
         if (!isRatingsCollection(ratings)) {
-            throw new Error("Malformed data - supplied data is not a collection of movie ratings.");
+            throw new Error(ratings);
         }
         context.res = await axios.get(url, {
             method: "GET",
