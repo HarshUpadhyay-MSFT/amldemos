@@ -20,7 +20,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
     try {
         const ratings = JSON.parse(JSON.stringify(req.body) || "{}")
         if (!isRatingsCollection(ratings)) {
-            throw new Error(ratings);
+            throw new Error(JSON.stringify(ratings));
         }
         context.res = await axios.post(url, ratings, {
             headers: {
