@@ -27,8 +27,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
             data: ratings,
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': ('Bearer ' + api_key),
-                'azureml-model-deployment': 'cors-3'
+                'Authorization': ('Bearer ' + api_key)
             }
         });
     } catch (err) {
