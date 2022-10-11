@@ -18,7 +18,7 @@ function isRatingsCollection(arg: any): arg is RatingsCollection {
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
     context.log('HTTP trigger function processed a request.');
     try {
-        const ratings = JSON.parse(req.body || {})
+        const ratings = JSON.parse(JSON.stringify(req.body) || "{}")
         if (!isRatingsCollection(ratings)) {
             throw new Error("Malformed data - supplied data is not a collection of movie ratings.");
         }
