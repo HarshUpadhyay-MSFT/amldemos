@@ -22,12 +22,14 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
         if (!isRatingsCollection(data)) {
             throw new Error(`Malformed payload - expected a dictionary of <string:number> entries by received: ${JSON.stringify(data)}`);
         }
-        context.res = await axios.post(url, data, {
+        const resp = await axios.post(url, data, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': ('Bearer ' + api_key)
             }
         });
+        context.log("Recieved response from endpoint: ", resp);
+        context.res = resp;
     } catch (err) {
         context.res = {
             status: 400,
