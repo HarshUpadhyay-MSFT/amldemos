@@ -18,11 +18,11 @@ function isRatingsCollection(arg: any): arg is RatingsCollection {
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
     context.log('HTTP trigger function processed a request.');
     try {
-        const ratings = JSON.parse(JSON.stringify(req.body) || "{}")
-        if (!isRatingsCollection(ratings)) {
-            throw new Error(JSON.stringify(ratings));
+        const {data} = JSON.parse(JSON.stringify(req.body) || "{}");
+        if (!isRatingsCollection(data)) {
+            throw new Error(`Malformed payload - expected a dictionary of <string:number> entries by received: ${JSON.stringify(data)}`);
         }
-        context.res = await axios.post(url, ratings, {
+        context.res = await axios.post(url, data, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': ('Bearer ' + api_key)
