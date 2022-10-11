@@ -29,7 +29,10 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
             }
         });
         context.log("Recieved response from endpoint: ", resp);
-        context.res = resp;
+        context.res = {
+            status: resp.status,
+            body: resp.data
+        };
     } catch (err) {
         context.res = {
             status: 400,
