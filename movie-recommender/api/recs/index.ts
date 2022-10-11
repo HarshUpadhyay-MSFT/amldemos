@@ -22,9 +22,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
         if (!isRatingsCollection(ratings)) {
             throw new Error(ratings);
         }
-        context.res = await axios.get(url, {
-            method: "GET",
-            data: ratings,
+        context.res = await axios.post(url, ratings, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': ('Bearer ' + api_key)
@@ -33,7 +31,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
     } catch (err) {
         context.res = {
             status: 400,
-            body: {message: getErrorMessage(err)}
+            body: { message: getErrorMessage(err) }
         }
     }
 };
