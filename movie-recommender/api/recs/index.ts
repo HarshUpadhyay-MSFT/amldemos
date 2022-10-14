@@ -25,7 +25,8 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
         const resp = await axios.post(url, data, {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': ('Bearer ' + api_key)
+                'Authorization': ('Bearer ' + api_key),
+                'azureml-model-deployment': 'default'
             }
         });
         context.log("Recieved response from endpoint: ", resp);
